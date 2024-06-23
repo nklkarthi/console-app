@@ -70,7 +70,7 @@ jobs:
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.23.0
       with:
-        image-ref: 'console-app:${{ steps.short-sha.outputs.sha }}'
+        image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/console-app:${{ steps.short-sha.outputs.sha }}
         format: 'table'
         exit-code: '1'
         ignore-unfixed: true
