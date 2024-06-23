@@ -34,7 +34,7 @@ jobs:
         cache: maven
 
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn --batch-mode --update-snapshots verify
 
     - name: Run with Maven
       run: java -jar target/console-0.0.1-SNAPSHOT.jar
@@ -51,3 +51,21 @@ jobs:
       with:
         name: Package
         path: staging
+
+    - name: Docker build
+      run: docker build -t console-app:${{ github.sha }} --build-arg JAR_FILE=target/*.jar .
+
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@0.20.0
+      with:
+        image-ref: 'console-app:${{ github.sha }}'
+        format: 'table'
+        exit-code: '1'
+        ignore-unfixed: true
+        vuln-type: 'os,library'
+        severity: 'CRITICAL,HIGH'
+
+    - name: Docker run
+      run: docker container run -it --rm console-app:${{ github.sha }}
+
+
