@@ -52,13 +52,18 @@ jobs:
         name: Package
         path: staging
 
+    - uses: benjlevesque/short-sha@v3.0
+      id: short-sha
+      with:
+        length: 7
+
     - name: Docker build
-      run: docker image build -t console-app:${{ github.sha }} .
+      run: docker image build -t console-app:${{ steps.short-sha.outputs.sha }} .
 
     - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@0.20.0
+      uses: aquasecurity/trivy-action@0.23.0
       with:
-        image-ref: 'console-app:${{ github.sha }}'
+        image-ref: 'console-app:${{ steps.short-sha.outputs.sha }}'
         format: 'table'
         exit-code: '1'
         ignore-unfixed: true
@@ -66,6 +71,6 @@ jobs:
         severity: 'CRITICAL,HIGH'
 
     - name: Docker run
-      run: docker container run -it --rm console-app:${{ github.sha }}
+      run: docker container run -i --rm console-app:${{ steps.short-sha.outputs.sha }}
 
 
