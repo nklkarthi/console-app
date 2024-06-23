@@ -37,7 +37,7 @@ jobs:
       run: mvn --batch-mode --update-snapshots package
 
     - name: Run with Maven
-      run: java -jar target/console-app-0.0.1-SNAPSHOT.jar
+      run: java -jar target/console-app-*.jar
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
@@ -52,7 +52,8 @@ jobs:
         name: Package
         path: staging
 
-    - uses: benjlevesque/short-sha@v3.0
+    - name: Short SHA for Docker
+      uses: benjlevesque/short-sha@v3.0
       id: short-sha
       with:
         length: 7
@@ -71,6 +72,6 @@ jobs:
         severity: 'CRITICAL,HIGH'
 
     - name: Docker run
-      run: docker container run -i --rm console-app:${{ steps.short-sha.outputs.sha }}
+      run: docker container run -i --rm ${{github.repository_owner}}/console-app:${{ steps.short-sha.outputs.sha }}
 
 
