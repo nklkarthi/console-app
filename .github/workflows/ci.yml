@@ -58,7 +58,7 @@ jobs:
         length: 7
 
     - name: Docker build
-      run: docker image build -t console-app:${{ steps.short-sha.outputs.sha }} .
+      run: docker image build -t console-app:${{ steps.short-sha.outputs.sha }} --build-arg JAR_FILE=target/console-app*.jar .
 
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.23.0
