@@ -35,10 +35,6 @@ jobs:
     - name: Build with Maven
       run: mvn --batch-mode --update-snapshots package
 
-    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@v4
-
     - name: Gather artifacts
       run: mkdir staging && cp target/*.jar staging
 
@@ -53,6 +49,9 @@ jobs:
     needs: build
 
     steps:
+    - name: Checkout Repository  
+      uses: actions/checkout@v4
+
     - name: Download artifact
       uses: actions/download-artifact@v4
       with:
@@ -68,11 +67,18 @@ jobs:
     - name: Run with Java
       run: java -jar staging/console-app-*.jar
 
+    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
+    - name: Update dependency graph
+      uses: advanced-security/maven-dependency-submission-action@v4
+
   docker_build:
     runs-on: ubuntu-latest
     needs: test
-
+    
     steps:
+    - name: Checkout Repository  
+      uses: actions/checkout@v4
+
     - name: Download artifact
       uses: actions/download-artifact@v4
       with:
