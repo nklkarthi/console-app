@@ -53,7 +53,7 @@ jobs:
         path: staging
 
     - name: Docker build
-      run: docker build -t console-app:${{ github.sha }} --build-arg JAR_FILE=target/*.jar .
+      run: docker image build -t console-app:${{ github.sha }} .
 
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.20.0

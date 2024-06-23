@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>dev.nklkarthi</groupId>
-	<artifactId>console</artifactId>
+	<artifactId>console-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>console</name>
 	<description>Console App for Spring Boot</description>
