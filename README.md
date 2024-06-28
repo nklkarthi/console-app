@@ -17,4 +17,6 @@ Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/
 mvn spring-boot:run
 ```
 
+## CI pipeline (Code build, Test and Docker build)
+
 <img width="1484" alt="Outcome of the build process" src="https://github.com/nklkarthi/console-app/assets/3054281/9cb2fbbc-7ea0-4336-a5fe-7e1876a793f2">
