@@ -13,9 +13,8 @@ There are several ways to run a Spring Boot application on your local machine. O
 
 Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-maven-plugin.html) like so:
 
-<img width="1484" alt="Outcome of the build process" src="https://github.com/nklkarthi/console-app/assets/3054281/9cb2fbbc-7ea0-4336-a5fe-7e1876a793f2">
-
-
 ```shell
 mvn spring-boot:run
 ```
+
+<img width="1484" alt="Outcome of the build process" src="https://github.com/nklkarthi/console-app/assets/3054281/9cb2fbbc-7ea0-4336-a5fe-7e1876a793f2">
